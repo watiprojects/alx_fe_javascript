@@ -1,0 +1,54 @@
+/*
+Write a JavaScript file (script.js) that handles the creation and manipulation of DOM elements based on user interactions.
+Manage an array of quote objects where each quote has a text and a category. Implement functions to display a random quote and to add new quotes called showRandomQuote and createAddQuoteForm` respectively
+*/
+
+//create array of quotes
+const quotes = [
+    {text: "quote1 - author1", category: "cat1"},
+    {text: "quote2 - author2", category: "cat2"},
+    {text: "quote3 - author3", category: "cat1"},
+    {text: "quote4 - author4", category: "cat3"},
+]
+
+//select quoteDisplay div
+    const quoteDisplayDiv = document.getElementById("quoteDisplay");
+
+//when button is clicked, display a random quote
+    //select button
+const button = document.getElementById("newQuote");
+    //add event listener to button
+button.addEventListener("click",showRandomQuote);
+    //create showRandomQuote function
+function showRandomQuote () {
+    //generate random index which is less than the array length
+    const randomIndex = Math.floor(Math.random()*quotes.length)
+    //display random quote in quoteDisplayDiv
+        //generate random quote
+    randomQuote = `${quotes[randomIndex].text} <br> ${quotes[randomIndex].category}`;
+        //change content of quoteDisplayDiv
+    quoteDisplayDiv.innerHTML = randomQuote;
+}
+
+//addQuote when user adds a quote
+    //create addQuote function
+function addQuote() {
+    //get inputs from user
+    const newQuoteText = document.getElementById("newQuoteText");
+    const newQuoteCategory = document.getElementById("newQuoteCategory");
+
+    const newQuoteTextInput = newQuoteText.value;
+    const newQuoteCategoryInput = newQuoteCategory.value;
+
+    //add newQuote text and category to array. 
+    quotes.push({text: newQuoteTextInput, category: newQuoteCategoryInput});
+
+    //clear input fields
+    newQuoteText.value = "";
+    newQuoteCategory.value = "";
+}
+
+
+
+
+

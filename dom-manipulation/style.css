@@ -1,0 +1,27 @@
+body{
+    font-family: sans-serif;
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#quoteDisplay{
+    color:red;
+    font-style: italic;
+}
+
+.userQuoteDiv{
+    display:flex;
+    flex-direction: column;
+    padding-top:20px;
+    width: 300px;
+    gap: 10px;
+}
+input{
+    padding:5px;
+}
+
+button{
+    width:150px;
+    padding:5px;
+}
