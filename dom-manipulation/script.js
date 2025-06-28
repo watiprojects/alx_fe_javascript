@@ -62,12 +62,17 @@ function addQuote() {
     const newQuoteTextInput = newQuoteText.value;
     const newQuoteCategoryInput = newQuoteCategory.value;
 
+    //add quote if either quote or category input is not empty
+    if (newQuoteTextInput !== "" || newQuoteCategoryInput !== ""){
+
+   
     //add newQuote text and category to array. 
     quotes.push({text: newQuoteTextInput, category: newQuoteCategoryInput});
 
     //clear input fields
     newQuoteText.value = "";
     newQuoteCategory.value = "";
+    }
 }
 
 
