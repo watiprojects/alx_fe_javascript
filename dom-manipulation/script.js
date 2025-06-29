@@ -156,22 +156,22 @@ function importFromJsonFile(event) {
 
 
 function populateCategories (){
-    //for each item in quotes array
-    quotes.forEach(function(quote){
-        //get the quote category
-        const category = quote.category;
+    //create an array of just the categories
+    const categories = quotes.map(quote => quote.category);
 
-        console.log(category);
+    console.log (categories);
+    categories.forEach (function(category){
         //create a new option element
         const newCategoryOption = document.createElement("option");
         //edit the option element
         newCategoryOption.value = category;
         newCategoryOption.innerHTML = category;
 
-    //append categories to category filter
-    categoryFilter.appendChild(newCategoryOption);
+        //append categories to category filter
+        categoryFilter.appendChild(newCategoryOption);
     });
-}
+        
+};
 
 populateCategories();
 
