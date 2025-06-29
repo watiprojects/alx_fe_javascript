@@ -113,7 +113,7 @@ function addQuote() {
 }
 
 
-//====downoad quotes feature====//
+//====Export quotes feature====//
 const downloadBtn = document.getElementById("download");
 
 //turn quotes into a string
@@ -137,6 +137,7 @@ link.click();
 URL.revokeObjectURL(url);
 })
 
+//====Import quotes feature====//
 function importFromJsonFile(event) {
     const fileReader = new FileReader();
     fileReader.onload = function(event) {
@@ -148,8 +149,38 @@ function importFromJsonFile(event) {
     fileReader.readAsText(event.target.files[0]);
   }
 
+  //====Select Quote Category Feature====//
+
+  //select category filter
+  const categoryFilter = document.getElementById("categoryFilter");
 
 
+function populateCategories (){
+    //for each item in quotes array
+    quotes.forEach(function(quote){
+        //get the quote category
+        const category = quote.category;
+
+        console.log(category);
+        //create a new option element
+        const newCategoryOption = document.createElement("option");
+        //edit the option element
+        newCategoryOption.value = category;
+        newCategoryOption.innerHTML = category;
+
+    //append categories to category filter
+    categoryFilter.appendChild(newCategoryOption);
+    });
+}
+
+populateCategories();
+
+//Filter Quotes functionality
+function filterQuotes (){
+    //if a filter is selected
+    //display quotes in that category
+    
+}
 
 
 
