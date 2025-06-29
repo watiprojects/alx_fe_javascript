@@ -26,7 +26,7 @@ if (storedQuotes !== null){
 ]
 }
 console.log(quotes);
- 
+
 
 //select quoteDisplay div
     const quoteDisplayDiv = document.getElementById("quoteDisplay");
@@ -77,34 +77,83 @@ function showRandomQuote () {
 
 }
 
-//addQuote when user adds a quote
-    //create addQuote function
-function addQuote() {
-    //get inputs from user
+
+function saveQuotes ()
+{
+    //save quotes to local storage
+    //turn array into a string
+    const jsonString = JSON.stringify(quotes);
+    localStorage.setItem("quotes", jsonString)
+    console.log(localStorage.quotes);
+}
+
+//ADD QUOTE FEATURE
+//get inputs from user
     const newQuoteText = document.getElementById("newQuoteText");
     const newQuoteCategory = document.getElementById("newQuoteCategory");
 
     const newQuoteTextInput = newQuoteText.value;
     const newQuoteCategoryInput = newQuoteCategory.value;
 
+    //create addQuote function
+function addQuote() {
+    
     //add quote if either quote or category input is not empty
     if (newQuoteTextInput !== "" || newQuoteCategoryInput !== ""){
-
    
     //add newQuote text and category to array. 
     quotes.push({text: newQuoteTextInput, category: newQuoteCategoryInput});
 
-    //save quotes to local storage
-    //turn array into a string
-    const jsonString = JSON.stringify(quotes);
-    localStorage.setItem("quotes", jsonString)
-    console.log(localStorage.quotes);
+    saveQuotes();
 
     //clear input fields
     newQuoteText.value = "";
     newQuoteCategory.value = "";
     }
 }
+
+
+//====downoad quotes feature====//
+const downloadBtn = document.getElementById("download");
+
+//turn quotes into a string
+const quotesString = JSON.stringify(quotes);
+
+//create Blob - downloadable file - which is a JSON string
+const blob = new Blob([quotesString], {type:"application/json"})
+
+downloadBtn.addEventListener("click", function ()
+{
+    const url = URL.createObjectURL(blob);
+const link = document.createElement("a");
+//set the href of the new link item
+link.href = url;
+//set download attribute on the new link and name the file
+link.download = "quotes.json";
+//programatically click the link - as if the user clicked it
+link.click();
+
+//clear temporary blob URL
+URL.revokeObjectURL(url);
+})
+
+function importFromJsonFile(event) {
+    const fileReader = new FileReader();
+    fileReader.onload = function(event) {
+      const importedQuotes = JSON.parse(event.target.result);
+      quotes.push(...importedQuotes);
+      saveQuotes();
+      alert('Quotes imported successfully!');
+    };
+    fileReader.readAsText(event.target.files[0]);
+  }
+
+
+
+
+
+
+
 
 
     
